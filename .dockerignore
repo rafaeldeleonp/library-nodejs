@@ -1,0 +1,17 @@
+# files
+.env
+.env.*
+.gitignore
+.editorconfig
+LICENSE.md
+README.md
+yarn-error.log
+
+# folders
+.git
+node_modules
+build
+.idea
+.nyc_output
+logs
+

@@ -1,0 +1,45 @@
+{
+  "name": "nodejs-setup",
+  "version": "1.0.0",
+  "description": "NodeJS REST API setup for MongoDB using n-tier architecture",
+  "scripts": {
+    "start": "npm run lint && npm run build && node -r dotenv/config build/startup/index.js",
+    "start:docker": "node build/startup/index.js",
+    "build": "./node_modules/.bin/babel -d build/ src/ --source-maps",
+    "lint": "./node_modules/.bin/eslint ./",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rafaeldeleonp/nodejs-setup.git"
+  },
+  "author": "Rafael De Leon",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rafaeldeleonp/nodejs-setup/issues"
+  },
+  "homepage": "https://github.com/rafaeldeleonp/nodejs-setup#readme",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-eslint": "^10.0.1",
+    "babel-plugin-add-module-exports": "^1.0.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-decorators-legacy": "^1.3.5",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "eslint": "^5.15.1",
+    "node": "^11.11.0"
+  },
+  "dependencies": {
+    "babel-polyfill": "^6.26.0",
+    "bunyan": "^1.8.12",
+    "dotenv": "^6.2.0",
+    "hapi": "^18.1.0",
+    "joi": "^14.3.1",
+    "joi-objectid": "^2.0.0",
+    "jsonquerylanguage": "^0.91.7",
+    "lodash": "^4.14.122",
+    "mongoose": "^5.4.18"
+  }
+}

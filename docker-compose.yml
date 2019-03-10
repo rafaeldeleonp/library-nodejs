@@ -1,0 +1,19 @@
+version: '2'
+services:
+  app:
+    container_name: nodejs-setup
+    build: .
+    environment:
+      - DEBUG=*
+      - DEBUG_LEVEL=debug
+      - PORT=3000
+      - MONGO_URI=mongodb://mongo:27017/development
+    ports: 
+      - "3000:3000"
+    links:
+      - mongo
+  mongo:
+    container_name: mongo
+    image: mongo:latest
+    ports:
+      - "27017:27017"
