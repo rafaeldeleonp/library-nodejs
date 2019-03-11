@@ -44,7 +44,6 @@ export function loadModels() {
   /* Import models to be loaded on mongoose.models because models should not be imported using
   import statement.
   */
-  require('../data_access/schemas/example');
   require('../data_access/schemas/author');
   require('../data_access/schemas/book');
   require('../data_access/schemas/genre');

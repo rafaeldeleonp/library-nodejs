@@ -48,10 +48,10 @@ class AuthorService extends Service {
   @normalizer({serializer: normalizeService})
   async create(params) {
     const schema = Joi.object().keys({
-      key: PROPS.key.required(),
       first_name: PROPS.first_name.required(),
       last_name: PROPS.last_name.required(),
-      birth_date: PROPS.birth_date.required(),
+      born: PROPS.born.required(),
+      died: PROPS.died,
     });
 
     const data = validateSchema(params, schema);
@@ -66,7 +66,8 @@ class AuthorService extends Service {
     const schema = Joi.object().keys({
       first_name: PROPS.first_name,
       last_name: PROPS.last_name,
-      birth_date: PROPS.birth_date,
+      born: PROPS.born,
+      died: PROPS.died,
     });
 
     const data = validateSchema(params, schema);

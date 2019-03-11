@@ -5,6 +5,7 @@
   "scripts": {
     "start": "npm run lint && npm run build && node -r dotenv/config build/startup/index.js",
     "start:docker": "node build/startup/index.js",
+    "seed": "node build/seed.js",
     "build": "./node_modules/.bin/babel -d build/ src/ --source-maps",
     "lint": "./node_modules/.bin/eslint ./",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -29,6 +30,7 @@
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "eslint": "^5.15.1",
+    "mongo-seeding": "^3.1.0",
     "node": "^11.11.0"
   },
   "dependencies": {

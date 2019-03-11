@@ -1,10 +1,6 @@
 import {Schema, model} from 'mongoose';
 
 const schema = new Schema({
-  key: {
-    type: String,
-    required: true,
-  },
   first_name: {
     type: String,
     required: true,
@@ -13,9 +9,12 @@ const schema = new Schema({
     type: String,
     required: true,
   },
-  birth_date: {
+  born: {
     type: Date,
     required: true,
+  },
+  died: {
+    type: Date,
   },
 });
 
