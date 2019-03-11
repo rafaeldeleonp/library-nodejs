@@ -13,6 +13,7 @@ class AuthorRepository extends MongoBase {
   @normalizer()
   async getOne(query) {
     this.transformId(query);
+
     return await this.model.findOne(query).exec();
   }
 

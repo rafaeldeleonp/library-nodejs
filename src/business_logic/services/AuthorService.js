@@ -1,4 +1,5 @@
 import RecordNotFoundException from '../exceptions/RecordNotFoundException';
+import EntityDuplicatedError from '../exceptions/EntityDuplicatedError';
 import normalizer from '../factories/normalizer';
 import Service from './Base';
 import Joi from 'joi';
@@ -55,6 +56,9 @@ class AuthorService extends Service {
     });
 
     const data = validateSchema(params, schema);
+
+    const find = await this.author.getOne({first_name: params.first_name, last_name: params.last_name});
+    if (find) throw new EntityDuplicatedError('Author', `${params.first_name} ${params.last_name}`);
 
     return await this.author.create(data);
   }

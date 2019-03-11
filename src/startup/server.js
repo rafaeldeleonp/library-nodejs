@@ -31,7 +31,7 @@ const createHandlerWrapper = () => ({handler}) => async (request, reply) => {
   });
 
   if (!response.ok) {
-    return reply(response);
+    return reply.response(response);
   }
 
   return reply.response(response);

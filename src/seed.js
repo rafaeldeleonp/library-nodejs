@@ -14,8 +14,6 @@ const seeder = new Seeder(config);
 
 const collections = seeder.readCollectionsFromPath(path.resolve('./build/seeds'));
 
-console.log('COLLECTIONS', collections); //eslint-disable-line
-
 seeder
   .import(collections)
   .then(() => {

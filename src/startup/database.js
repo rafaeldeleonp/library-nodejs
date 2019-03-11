@@ -19,7 +19,7 @@ export const connect = () => {
     loadModels();
 
     if (!Mongoose.connection.readyState) {
-      Mongoose.connect(MONGO_URI || undefined, {useNewUrlParser: true, useFindAndModify: false});
+      Mongoose.connect(MONGO_URI || undefined, {useNewUrlParser: true, useFindAndModify: false, useCreateIndex: true});
       Mongoose.connection.once('error', (e) => {
         logger.error({error: e}, 'mongooose connection error.');
         reject(e);
