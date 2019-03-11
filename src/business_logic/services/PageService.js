@@ -42,13 +42,12 @@ class PageService extends Service {
 
   @normalizer({serializer: normalizeService})
   async getMany() {
-    return this.example.getMany();
+    return this.page.getMany();
   }
 
   @normalizer({serializer: normalizeService})
   async create(params) {
     const schema = Joi.object().keys({
-      key: PROPS.key.required(),
       book_id: PROPS.book_id.required(),
       content: PROPS.content.required(),
       number: PROPS.number.required(),
@@ -64,7 +63,6 @@ class PageService extends Service {
     validateSchema(id, PROPS.id.required());
 
     const schema = Joi.object().keys({
-      key: PROPS.key,
       book_id: PROPS.book_id,
       content: PROPS.content,
       number: PROPS.number,

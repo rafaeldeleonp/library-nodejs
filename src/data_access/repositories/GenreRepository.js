@@ -7,6 +7,7 @@ class GenreRepository extends MongoBase {
 
   constructor() {
     super();
+    
     this.model = this.buildModel('Genre');
   }
 

@@ -26,7 +26,7 @@ export default function ({Server, Middleware, Joi}) {
 
   Server.route({
     method: 'GET',
-    path: `/${entity}`,
+    path: `/${entity}s`,
     handler: Middleware({
       handler: list,
     }),
