@@ -30,3 +30,7 @@ docker-compose build
 ```sh
 docker-compose up
 ```
+
+### IMPORTANT
+
+To run `npm run seed`, first be sure that `build` folder exists.
