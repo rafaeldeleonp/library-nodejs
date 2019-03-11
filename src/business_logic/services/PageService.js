@@ -1,11 +1,17 @@
-import RecordNotFoundException from '../exceptions/RecordNotFoundException';
-import normalizer from '../factories/normalizer';
 import Service from './Base';
 import Joi from 'joi';
+import omit from 'lodash/omit';
+import appRootDir from 'app-root-dir';
+import path from 'path';
+import fs from 'fs';
+import Handlebars from 'handlebars';
+import normalizer from '../factories/normalizer';
 import normalizeService, {PROPS} from '../factories/page';
 import PageRepository from '../../data_access/repositories/PageRepository';
 import {validateSchema} from '../../utils/helper';
+import {HTML} from '../../constants';
 import MissingDependenciesError from '../exceptions/MissingDependenciesError';
+import RecordNotFoundException from '../exceptions/RecordNotFoundException';
 
 const pageRepositorySchema = Joi.object()
   .type(PageRepository, 'PageRepository')
@@ -45,18 +51,28 @@ class PageService extends Service {
     const schema = Joi.object().keys({
       book_id: PROPS.book_id,
       number: PROPS.number,
+      format: PROPS.format,
     });
 
     const data = validateSchema(params, schema);
 
-    const page = await this.page.getOne(data);
+    const page = await this.page.getOne(omit(data, ['format']));
+    let content = '';
+
+    if (data.format === HTML) {
+      const tplPath = path.resolve(path.join(appRootDir.get(), 'src', 'template.html'));
+      const tplFile = fs.readFileSync(tplPath);
+      let template = Handlebars.compile(tplFile.toString());
+      content = template({content: page.content});
+    }
 
     if (!page) throw new RecordNotFoundException('page not found');
 
-    return page;
+    return {
+      ...page,
+      content: data.format === HTML ? content : page.content,
+    };
   }
-
-  async 
 
   @normalizer({serializer: normalizeService})
   async getMany() {

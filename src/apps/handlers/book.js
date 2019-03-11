@@ -17,6 +17,7 @@ export const readBookPage = async function({query}, {logger}) {
     const page = await this.page.getOne({
       book_id: book.id,
       number: query.number,
+      format: query.format,
     });
 
     return OK(page.content);

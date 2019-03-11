@@ -50,7 +50,6 @@ class BookService extends Service {
 
   @normalizer({serializer: normalizeService})
   async getMany() {
-
     const books = await this.book.getMany();
 
     return books;

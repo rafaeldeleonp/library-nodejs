@@ -1,3 +1,8 @@
+
+export const TEXT = 'text';
+
+export const HTML = 'html';
+
 export const NODE_ENV = process.env.NODE_ENV || 'development';
 
 export const DEBUG = process.env.DEBUG || 'fatal';
