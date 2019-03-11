@@ -3,7 +3,6 @@ const genres = require('../genres/genres');
 import {ObjectID} from 'bson';
 import find from 'lodash/find';
 
-
 const books = [
   {
     ISBN: '9780679734505',
@@ -112,6 +111,7 @@ const booksData = books.map((book) => {
     summary: book.summary,
     authors: getAuthorsIds(book.authors),
     genres: getGenresIds(book.genres),
+    pages: 0,
   };
 });
 
