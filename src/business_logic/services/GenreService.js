@@ -2,22 +2,22 @@ import RecordNotFoundException from '../exceptions/RecordNotFoundException';
 import normalizer from '../factories/normalizer';
 import Service from './Base';
 import Joi from 'joi';
-import normalizeService, {PROPS} from '../factories/author';
-import AuthorRepository from '../../data_access/repositories/AuthorRepository';
+import normalizeService, {PROPS} from '../factories/genre';
+import GenreRepository from '../../data_access/repositories/GenreRepository';
 import {validateSchema} from '../../utils/helper';
 import MissingDependenciesError from '../exceptions/MissingDependenciesError';
 
-const authorRepositorySchema = Joi.object()
-  .type(AuthorRepository, 'AuthorRepository')
-  .error(new MissingDependenciesError('AuthorRepository'))
+const genreRepositorySchema = Joi.object()
+  .type(GenreRepository, 'GenreRepository')
+  .error(new MissingDependenciesError('GenreRepository'))
   .required();
 
 const dependenciesSchema = Joi.object().keys({
-  author: authorRepositorySchema,
+  genre: genreRepositorySchema,
 }).unknown(true);
 
-class AuthorService extends Service {
-  _entity = 'author';
+class GenreService extends Service {
+  _entity = 'genre';
 
   constructor(dependencies = {}) {
     super();
@@ -26,37 +26,35 @@ class AuthorService extends Service {
       ...dependencies,
     }, dependenciesSchema, false);
 
-    this.author = dependencies.author;
+    this.genre = dependencies.genre;
   }
 
   @normalizer({serializer: normalizeService})
   async getById(id) {
     validateSchema(id, PROPS.id.required());
 
-    const author = await this.author.getOne({id});
+    const genre = await this.genre.getOne({id});
 
-    if (!author) throw new RecordNotFoundException('author not found');
+    if (!genre) throw new RecordNotFoundException('genre not found');
 
-    return author;
+    return genre;
   }
 
   @normalizer({serializer: normalizeService})
   async getMany() {
-    return this.author.getMany();
+    return this.genre.getMany();
   }
 
   @normalizer({serializer: normalizeService})
   async create(params) {
     const schema = Joi.object().keys({
       key: PROPS.key.required(),
-      first_name: PROPS.first_name.required(),
-      last_name: PROPS.last_name.required(),
-      birth_date: PROPS.birth_date.required(),
+      name: PROPS.name.required(),
     });
 
     const data = validateSchema(params, schema);
 
-    return await this.author.create(data);
+    return await this.genre.create(data);
   }
 
   @normalizer({serializer: normalizeService})
@@ -64,15 +62,14 @@ class AuthorService extends Service {
     validateSchema(id, PROPS.id.required());
 
     const schema = Joi.object().keys({
-      first_name: PROPS.first_name,
-      last_name: PROPS.last_name,
-      birth_date: PROPS.birth_date,
+      key: PROPS.key,
+      name: PROPS.name,
     });
 
     const data = validateSchema(params, schema);
 
-    return await this.author.update(id, data);
+    return await this.genre.update(id, data);
   }
 }
 
-export default AuthorService;
+export default GenreService;

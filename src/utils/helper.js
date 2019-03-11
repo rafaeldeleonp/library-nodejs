@@ -1,5 +1,7 @@
 import Joi from 'joi';
+import _ from 'lodash';
 import bunyan from 'bunyan';
+import {Types} from 'mongoose';
 import { DEBUG_LEVEL } from '../constants';
 import BadParamsError from '../business_logic/exceptions/BadParamsError';
 
@@ -31,4 +33,16 @@ export function validateSchema(value, schema, wrap = true) {
 export function getIdFromObject(params) {
   const id = params.id || params._id || undefined;
   return id ? id.toString() : id;
+}
+
+export function getObjectIds(ids, toString = true) {
+  if (!_.isArray(ids) || _.isEmpty(ids)) return ids;
+  return ids.map((id) => getObjectId(id, toString));
+}
+
+export function getObjectId(id, toString = false) {
+  if (toString && id instanceof Types.ObjectId) {
+    return id.toString();
+  }
+  return id ? (_.isString(id) && Types.ObjectId.isValid(id) && toString === false) ? new Types.ObjectId(id) : id : null;
 }
