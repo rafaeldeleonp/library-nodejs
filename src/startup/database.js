@@ -45,8 +45,8 @@ export function loadModels() {
   import statement.
   */
   require('../data_access/schemas/example');
+  require('../data_access/schemas/author');
   require('../data_access/schemas/book');
   require('../data_access/schemas/genre');
-  require('../data_access/schemas/author');
   require('../data_access/schemas/page');
 }

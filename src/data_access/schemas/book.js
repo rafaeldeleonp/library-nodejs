@@ -1,6 +1,10 @@
 import {Schema, model} from 'mongoose';
 
 const schema = new Schema({
+  ISBN: {
+    type: String,
+    required: true,
+  },
   title: {
     type: String,
     required: true,
@@ -8,12 +12,8 @@ const schema = new Schema({
   summary: {
     type: String,
   },
-  author: {
+  authors: {
     type: [Schema.Types.ObjectId],
-    required: true,
-  },
-  ISBN: {
-    type: String,
     required: true,
   },
   genres: {
