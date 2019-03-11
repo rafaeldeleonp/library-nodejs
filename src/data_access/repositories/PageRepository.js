@@ -13,17 +13,17 @@ class PageRepository extends MongoBase {
   @normalizer()
   async getOne(query) {
     this.transformId(query);
-    return await this.model.findOne(query).exec();
+    return this.model.findOne(query).exec();
   }
 
   @normalizer()
   async getMany() {
-    return await this.model.find().exec();
+    return this.model.find().exec();
   }
 
   @normalizer()
   async count(query) {
-    return await this.model.count(query).exec();
+    return this.model.count(query).exec();
   }
 
   @normalizer()

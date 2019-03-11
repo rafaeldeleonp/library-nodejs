@@ -14,12 +14,12 @@ class GenreRepository extends MongoBase {
   @normalizer()
   async getOne(query) {
     this.transformId(query);
-    return await this.model.findOne(query).exec();
+    return this.model.findOne(query).exec();
   }
 
   @normalizer()
   async getMany() {
-    return await this.model.find().exec();
+    return this.model.find().exec();
   }
 
   @normalizer()

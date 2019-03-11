@@ -73,7 +73,7 @@ class BookService extends Service {
 
     const data = validateSchema(params, schema);
 
-    return await this.book.create(data);
+    return this.book.create(data);
   }
 
   @normalizer({serializer: normalizeService})
@@ -89,7 +89,7 @@ class BookService extends Service {
 
     const data = validateSchema(params, schema);
 
-    return await this.book.update(id, data);
+    return this.book.update(id, data);
   }
 }
 

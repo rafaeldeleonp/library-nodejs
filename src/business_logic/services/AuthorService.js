@@ -60,7 +60,7 @@ class AuthorService extends Service {
     const find = await this.author.getOne({first_name: params.first_name, last_name: params.last_name});
     if (find) throw new EntityDuplicatedError('Author', `${params.first_name} ${params.last_name}`);
 
-    return await this.author.create(data);
+    return this.author.create(data);
   }
 
   @normalizer({serializer: normalizeService})
@@ -76,7 +76,7 @@ class AuthorService extends Service {
 
     const data = validateSchema(params, schema);
 
-    return await this.author.update(id, data);
+    return this.author.update(id, data);
   }
 }
 

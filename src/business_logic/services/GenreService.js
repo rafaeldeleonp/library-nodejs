@@ -58,7 +58,7 @@ class GenreService extends Service {
     const find = await this.genre.getOne({name: params.name});
     if (find) throw new EntityDuplicatedError('Genre', `${params.name}`);
 
-    return await this.genre.create(data);
+    return this.genre.create(data);
   }
 
   @normalizer({serializer: normalizeService})
@@ -72,7 +72,7 @@ class GenreService extends Service {
 
     const data = validateSchema(params, schema);
 
-    return await this.genre.update(id, data);
+    return this.genre.update(id, data);
   }
 }
 

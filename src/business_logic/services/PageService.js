@@ -55,7 +55,7 @@ class PageService extends Service {
 
     const data = validateSchema(params, schema);
 
-    return await this.page.create(data);
+    return this.page.create(data);
   }
 
   @normalizer({serializer: normalizeService})
@@ -70,7 +70,7 @@ class PageService extends Service {
 
     const data = validateSchema(params, schema);
 
-    return await this.page.update(id, data);
+    return this.page.update(id, data);
   }
 }
 
