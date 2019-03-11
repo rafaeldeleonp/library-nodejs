@@ -2,14 +2,14 @@ import {PROPS} from '../../business_logic/factories/genre';
 
 export const create = (Joi) => {
   return Joi.object().keys({
-    key: PROPS.key.required(),
     name: PROPS.name.required(),
+    description: PROPS.description,
   });
 };
 
 export const update = (Joi) => {
   return Joi.object().keys({
-    key: PROPS.key,
     name: PROPS.name,
+    description: PROPS.description,
   });
 };

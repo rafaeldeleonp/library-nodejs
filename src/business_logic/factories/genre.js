@@ -5,15 +5,15 @@ Joi.objectId = joiObjectId(Joi);
 
 export const PROPS = {
   id: Joi.objectId(),
-  key: Joi.string(),
   name: Joi.string(),
+  description: Joi.string(),
 };
 
 export default function normalizeService(params) {
   const doc = {
     id: getIdFromObject(params),
-    key: params.key,
     name: params.name,
+    description: params.description,
   };
 
   return doc;

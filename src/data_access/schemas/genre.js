@@ -1,13 +1,12 @@
 import {Schema, model} from 'mongoose';
 
 const schema = new Schema({
-  key: {
-    type: String,
-    required: true,
-  },
   name: {
     type: String,
     required: true,
+  },
+  description: {
+    type: String,
   },
 });
 

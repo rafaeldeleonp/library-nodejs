@@ -1,4 +1,5 @@
 import RecordNotFoundException from '../exceptions/RecordNotFoundException';
+import EntityDuplicatedError from '../exceptions/EntityDuplicatedError';
 import normalizer from '../factories/normalizer';
 import Service from './Base';
 import Joi from 'joi';
@@ -48,11 +49,14 @@ class GenreService extends Service {
   @normalizer({serializer: normalizeService})
   async create(params) {
     const schema = Joi.object().keys({
-      key: PROPS.key.required(),
       name: PROPS.name.required(),
+      description: PROPS.description,
     });
 
     const data = validateSchema(params, schema);
+
+    const find = await this.genre.getOne({name: params.name});
+    if (find) throw new EntityDuplicatedError('Genre', `${params.name}`);
 
     return await this.genre.create(data);
   }
@@ -62,8 +66,8 @@ class GenreService extends Service {
     validateSchema(id, PROPS.id.required());
 
     const schema = Joi.object().keys({
-      key: PROPS.key,
       name: PROPS.name,
+      description: PROPS.description,
     });
 
     const data = validateSchema(params, schema);
