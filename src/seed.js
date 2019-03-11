@@ -1,12 +1,16 @@
 const path = require('path');
 const {Seeder} = require('mongo-seeding');
-const {MONGO_URI} = require('./constants');
+const {MONGO_HOST, MONGO_PORT, MONGO_COLLECTION} = require('./constants');
 const {getLogger} =  require('./utils/helper');
 
 const logger = getLogger('MongoDB seed');
 
 const config = {
-  database: MONGO_URI,
+  database: {
+    host: MONGO_HOST,
+    port: MONGO_PORT,
+    name: MONGO_COLLECTION,
+  },
   dropCollections: true,
 };
 
