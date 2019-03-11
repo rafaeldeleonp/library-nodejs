@@ -20,6 +20,10 @@ const schema = new Schema({
     type: [Schema.Types.ObjectId],
     required: true,
   },
+  pages: {
+    type: Number,
+    required: true,
+  },
 });
 
 export default model('Book', schema);

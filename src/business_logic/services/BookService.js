@@ -45,12 +45,7 @@ class BookService extends Service {
 
     if (!book) throw new RecordNotFoundException('book not found');
 
-    const pagesNumber = await this.page.count({book_id: id});
-
-    return {
-      ...book,
-      pages: pagesNumber,
-    };
+    return book;
   }
 
   @normalizer({serializer: normalizeService})
@@ -69,6 +64,7 @@ class BookService extends Service {
       summary: PROPS.summary,
       authors: PROPS.authors.required(),
       genres: PROPS.genres.required(),
+      pages: PROPS.pages.required(),
     });
 
     const data = validateSchema(params, schema);
@@ -85,6 +81,7 @@ class BookService extends Service {
       summary: PROPS.summary,
       authors: PROPS.authors,
       genres: PROPS.genres,
+      pages: PROPS.pages,
     });
 
     const data = validateSchema(params, schema);

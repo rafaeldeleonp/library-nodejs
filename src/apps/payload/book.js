@@ -7,6 +7,7 @@ export const create = (Joi) => {
     summary: PROPS.summary.required(),
     authors: PROPS.authors.required(),
     genres: PROPS.genres.required(),
+    pages: PROPS.pages.required(),
   });
 };
 
@@ -16,5 +17,6 @@ export const update = (Joi) => {
     summary: PROPS.summary,
     authors: PROPS.authors,
     genres: PROPS.genres,
+    pages: PROPS.pages,
   });
 };

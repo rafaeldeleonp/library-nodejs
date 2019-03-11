@@ -10,6 +10,7 @@ export const PROPS = {
   summary: Joi.string(),
   authors: Joi.array().items(Joi.objectId()).min(1),
   genres: Joi.array().items(Joi.objectId()).min(1),
+  pages: Joi.number(),
 };
 
 export default function normalizeService(params) {
