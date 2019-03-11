@@ -20,6 +20,7 @@ export default function normalizeService(params) {
     summary: params.summary || '',
     authors: getObjectIds(params.authors || []),
     genres: getObjectIds(params.genres || []),
+    pages: params.pages,
   };
 
   return doc;

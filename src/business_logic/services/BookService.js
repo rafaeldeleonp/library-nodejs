@@ -4,6 +4,7 @@ import Service from './Base';
 import Joi from 'joi';
 import normalizeService, {PROPS} from '../factories/book';
 import BookRepository from '../../data_access/repositories/BookRepository';
+import PageRepository from '../../data_access/repositories/PageRepository';
 import {validateSchema} from '../../utils/helper';
 import MissingDependenciesError from '../exceptions/MissingDependenciesError';
 
@@ -12,8 +13,14 @@ const bookRepositorySchema = Joi.object()
   .error(new MissingDependenciesError('BookRepository'))
   .required();
 
+const pageRepositorySchema = Joi.object()
+  .type(PageRepository, 'PageRepository')
+  .error(new MissingDependenciesError('PageRepository'))
+  .required();
+
 const dependenciesSchema = Joi.object().keys({
   book: bookRepositorySchema,
+  page: pageRepositorySchema,
 }).unknown(true);
 
 class BookService extends Service {
@@ -27,6 +34,7 @@ class BookService extends Service {
     }, dependenciesSchema, false);
 
     this.book = dependencies.book;
+    this.page = dependencies.page;
   }
 
   @normalizer({serializer: normalizeService})
@@ -37,12 +45,20 @@ class BookService extends Service {
 
     if (!book) throw new RecordNotFoundException('book not found');
 
-    return book;
+    const pagesNumber = await this.page.count({book_id: id});
+
+    return {
+      ...book,
+      pages: pagesNumber,
+    };
   }
 
   @normalizer({serializer: normalizeService})
   async getMany() {
-    return this.book.getMany();
+
+    const books = await this.book.getMany();
+
+    return books;
   }
 
   @normalizer({serializer: normalizeService})

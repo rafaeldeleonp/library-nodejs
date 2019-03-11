@@ -20,7 +20,7 @@ export default async function buildServices() {
 
   return {
     author: new AuthorService(_.pick(dependencies, ['author'])),
-    book: new BookService(_.pick(dependencies, ['book'])),
+    book: new BookService(_.pick(dependencies, ['book', 'page'])),
     genre: new GenreService(_.pick(dependencies, ['genre'])),
     page: new PageService(_.pick(dependencies, ['page'])),
   };

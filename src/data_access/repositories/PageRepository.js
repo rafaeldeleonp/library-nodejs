@@ -22,6 +22,11 @@ class PageRepository extends MongoBase {
   }
 
   @normalizer()
+  async count(query) {
+    return await this.model.count(query).exec();
+  }
+
+  @normalizer()
   async create(params) {
     let document;
 
