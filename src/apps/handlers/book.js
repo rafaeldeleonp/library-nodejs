@@ -11,6 +11,21 @@ export const read = async function({query}, {logger}) {
   }
 };
 
+export const readBookPage = async function({query}, {logger}) {
+  try {
+    const book = await this.book.getById(query.id);
+    const page = await this.page.getOne({
+      book_id: book.id,
+      number: query.number,
+    });
+
+    return OK(page.content);
+  } catch (e) {
+    logger.trace(e, 'something went wrong retrieving book page');
+    return wrapError(e);
+  }
+};
+
 export const list = async function({logger}) {
   try {
     const books = await this.book.getMany();

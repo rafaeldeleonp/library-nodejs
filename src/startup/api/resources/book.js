@@ -1,12 +1,13 @@
 
 import {
   read as readValidation,
+  readBookPage as readBookPageValidation,
 } from '../../../apps/params/book';
 import {
   create as createValidation,
   update as updateValidation,
 } from '../../../apps/payload/book';
-import {read, list, create, update} from '../../../apps/handlers/book';
+import {read, readBookPage, list, create, update} from '../../../apps/handlers/book';
 
 const entity = 'book';
 
@@ -21,6 +22,19 @@ export default function ({Server, Middleware, Joi}) {
     },
     handler: Middleware({
       handler: read,
+    }),
+  });
+
+  Server.route({
+    method: 'GET',
+    path: `/${entity}/{id}/page/{number}/{format}`,
+    options: {
+      validate: {
+        params: readBookPageValidation(Joi),
+      },
+    },
+    handler: Middleware({
+      handler: readBookPage,
     }),
   });
 

@@ -41,6 +41,24 @@ class PageService extends Service {
   }
 
   @normalizer({serializer: normalizeService})
+  async getOne(params) {
+    const schema = Joi.object().keys({
+      book_id: PROPS.book_id,
+      number: PROPS.number,
+    });
+
+    const data = validateSchema(params, schema);
+
+    const page = await this.page.getOne(data);
+
+    if (!page) throw new RecordNotFoundException('page not found');
+
+    return page;
+  }
+
+  async 
+
+  @normalizer({serializer: normalizeService})
   async getMany() {
     return this.page.getMany();
   }
